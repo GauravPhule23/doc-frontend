@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+.active button{
+    text-decoration: underline;
+    text-decoration-color: rgb(0, 0, 102);
+    text-underline-offset: 6px;
+    text-decoration-thickness: 3px;
+}
+
+::-webkit-scrollbar{
+    @apply hidden
+}
