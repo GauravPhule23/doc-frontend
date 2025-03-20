@@ -2,6 +2,8 @@ import React from 'react'
 import { doctors } from '../assets/assets'
 import { Link, Navigate, useNavigate } from 'react-router'
 
+// use params and use context is left
+
 export const TopDoctors = () => {
 
     const navigate = useNavigate()

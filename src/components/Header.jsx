@@ -3,7 +3,7 @@ import { assets } from '../assets/assets'
 
 export const Header = () => {
   return (
-      <div className='bg-indigo-500 rounded-md mx-auto px-16 flex justify-evenly'>
+      <div className='bg-indigo-500 rounded-md mx-auto px-16 flex justify-evenly mt-6'>
         
         {/* left side */}
 
@@ -26,7 +26,7 @@ export const Header = () => {
         {/* right side */}
 
         <div className='mt-16'>
-          <img src={assets.header_img} alt="" />
+          <img src={assets.threedocs} alt="" className='w-5xl min-w-auto'/>
         </div>
       </div>
   )

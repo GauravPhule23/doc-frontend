@@ -1,5 +1,7 @@
 import appointment_img from './appointment_img.png'
+import pointer from './pointer.png'
 import header_img from './header_img.png'
+import threedocs from './threedocs.png'
 import group_profiles from './group_profiles.png'
 import profile_pic from './profile_pic.png'
 import contact_image from './contact_image.png'
@@ -40,7 +42,9 @@ import qc from './qc.png'
 
 export const assets = {
     appointment_img,
+    pointer,
     header_img,
+    threedocs,
     group_profiles,
     logo,
     chats_icon,
