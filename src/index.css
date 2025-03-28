@@ -1,13 +1,18 @@
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@import "tailwindcss";
 
-.active button{
+.active button {
     text-decoration: underline;
     text-decoration-color: rgb(0, 0, 102);
     text-underline-offset: 6px;
     text-decoration-thickness: 3px;
 }
 
-::-webkit-scrollbar{
-    @apply hidden
-}       
+* {
+    font-family: 'Manrope', sans-serif;
+}
+
+/* Hide scrollbar */
+::-webkit-scrollbar {
+    display: none;
+}

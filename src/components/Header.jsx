@@ -12,7 +12,7 @@ export const Header = () => {
           <br />
           <p className='text-4xl font-extrabold'>With Trusted Doctors</p>
 
-          <div className='flex my-4'>
+          <div className='flex my-4 '>
             <img src={assets.group_profiles} className='h-12 w-28 mr-6' alt="" />
             <p className='felx flex-wrap'> 
               Simply browse through our extensive list of trusted doctors, 
