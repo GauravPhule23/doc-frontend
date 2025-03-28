@@ -22,14 +22,14 @@ export const Signup = () => {
         <form className="min-h-[80vh] flex items-center">
             <div className="flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 text-zinc-600 rounded-xl shadow-lg">
                 {/* Tab Switch */}
-                <div className="flex w-full">
+                <div className="flex w-full ">
                     <button 
-                        className={`flex-1 py-2 ${userType === 'user' ? 'bg-indigo-600 text-white' : 'bg-gray-200'}`} 
+                        className={`flex-1 py-2 ${userType === 'user' ? 'bg-indigo-600 text-white' : 'bg-gray-200'} rounded-lg`} 
                         onClick={() => setUserType('user')}
                         type="button"
                     >User</button>
                     <button 
-                        className={`flex-1 py-2 ${userType === 'doctor' ? 'bg-indigo-600 text-white' : 'bg-gray-200'}`} 
+                        className={`flex-1 py-2 ${userType === 'doctor' ? 'bg-indigo-600 text-white' : 'bg-gray-200'} rounded-lg`} 
                         onClick={() => setUserType('doctor')}
                         type="button"
                     >Doctor</button>
