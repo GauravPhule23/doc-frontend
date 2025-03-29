@@ -12,7 +12,7 @@ export const Navbar = () => {
         {/* logo and name */}
 
         <div className='flex flex-row cursor-pointer' id='logo and name' onClick={() => navigate('/')}>
-            <img src={assets.qc}  className='w-12 h-12 rounded-xl my-auto mx-4 cursor-pointer' alt=''/>
+            <img src={assets.qc}  className='w-12 h-12 rounded-2xl my-auto mx-4 cursor-pointer' alt=''/>
             <h1 className='font-bold text-blue-950 text-2xl ml-0.5 my-auto sm:block hidden'> QuickCare</h1>
         </div>
 

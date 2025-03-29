@@ -18,6 +18,11 @@ export const Signup = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    // add function here to handle form submission
+    const handleSubmit = (e) => {
+        
+    }; 
+
     return (
         <form className="min-h-[80vh] flex items-center">
             <div className="flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 text-zinc-600 rounded-xl shadow-lg">
@@ -123,8 +128,10 @@ export const Signup = () => {
                     </div>
    
                 )}
+                
+                {/* button for submitting form */}
 
-                <button className='bg-indigo-600 text-white w-full py-2 rounded-md text-base cursor-pointer mt-2'>Create Account</button>
+                <button className='bg-indigo-600 text-white w-full py-2 rounded-md text-base cursor-pointer mt-2' onClick={() => handleSubmit()} >Create Account</button> 
                 <p>Already have an account? <Link to={'/login'} className='text-indigo-600 underline cursor-pointer'>Login here</Link> </p>
             </div>
         </form>
