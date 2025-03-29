@@ -30,7 +30,7 @@ export const Login = () => {
         <p>Please log in to continue</p>
 
         <div className='w-full'>
-          <p>Email</p>
+          <p className='font-semibold'>Email</p>
           <input
             className='border border-zinc-300 rounded w-full p-2 mt-2'
             type="email"
@@ -39,7 +39,7 @@ export const Login = () => {
         </div>
 
         <div className='w-full'>
-          <p>Password</p>
+          <p className='font-semibold'>Password</p>
           <input
             className='border border-zinc-300 rounded w-full p-2 mt-2'
             type="password"

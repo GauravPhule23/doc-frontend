@@ -19,7 +19,7 @@ export const Banner = () => {
                 <p className='mt-4'>With Trusted doctors</p>
               </div>
 
-                <button onClick={() => {navigate('/login'); scrollTo(0,0)}} className='bg-white text-sm sm:text-base text-gray-700 px-8 py-3 rounded-full mt-6 cursor-pointer hover:scale-105 transition-all delay-10'>Create account</button>
+                <button onClick={() => {navigate('/login'); scrollTo(0,0)}} className='bg-white text-sm sm:text-base text-gray-700 px-8 py-3 rounded-full mt-8 cursor-pointer hover:scale-105 transition-all delay-10'>Create account</button>
             </div>
 
             {/* right side */}

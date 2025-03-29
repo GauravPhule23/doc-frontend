@@ -25,7 +25,7 @@ export const Signup = () => {
 
     return (
         <form className="min-h-[80vh] flex items-center">
-            <div className="flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 text-zinc-600 rounded-xl shadow-lg">
+            <div className="flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-[500px] text-zinc-600 rounded-xl shadow-lg">
 
                 {/* Tab Switch */}
                 <div className="flex w-full ">
@@ -44,7 +44,7 @@ export const Signup = () => {
                 <p className='text-2xl font-semibold mt-2 mx-auto'>Create {userType === 'user' ? 'User' : 'Doctor'} Account</p>
 
                 {userType === 'doctor' && (
-                    <div className='w-full flex flex-col items-center my-3'>
+                    <div className='w-full flex flex-col items-center mt-4'>
                         <label htmlFor="profilePic">
                             <img 
                                 src={formData.profilePic || "https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"} 
@@ -74,27 +74,27 @@ export const Signup = () => {
 
                 {/* Common Fields */}
 
-                <div className='w-full'>
-                    <p>Full Name</p>
+                <div className='w-full mt-4'>
+                    <p className='font-semibold'>Full Name</p>
                     <input className='border border-zinc-300 rounded w-full p-2 mt-2' type="text" name="fullName" onChange={handleChange} value={formData.fullName} required />
                 </div>
                 <div className='w-full'>
-                    <p>Email</p>
+                    <p className='font-semibold'>Email</p>
                     <input className='border border-zinc-300 rounded w-full p-2 mt-2' type="email" name="email" onChange={handleChange} value={formData.email} required />
                 </div>
                 <div className='w-full'>
-                    <p>Password</p>
+                    <p className='font-semibold'>Password</p>
                     <input className='border border-zinc-300 rounded w-full p-2 mt-2' type="password" name="password" onChange={handleChange} value={formData.password} required />
                 </div>
-                <div className='w-full flex'>
-                    <p className='gap-4 mt-2'>Gender</p>
+                <div className='w-full'>
+                    <p className='gap-4 mt-2 font-semibold'>Gender</p>
                     <div className="flex gap-4 mt-2 ml-3">
                         <label><input type="radio" name="gender" value="Male" onChange={handleChange} /> Male</label>
                         <label><input type="radio" name="gender" value="Female" onChange={handleChange} /> Female</label>
                     </div>
                 </div>
                 <div className='w-full'>
-                    <p>Date of Birth</p>
+                    <p className='font-semibold'>Date of Birth</p>
                     <input className='border border-zinc-300 rounded w-full p-2 mt-2' type="date" name="dob" onChange={handleChange} value={formData.dob} required />
                 </div>
 
@@ -103,7 +103,7 @@ export const Signup = () => {
                     <div>
 
                         <div className='w-full'>
-                            <p>Speciality</p>
+                            <p className='font-semibold'>Speciality</p>
                             <select className='border border-zinc-300 rounded w-full p-2 mt-2' name="speciality" onChange={handleChange} value={formData.speciality} required>
                                 <option value="">Select Speciality</option>
                                 {specialities.map((spec) => (
@@ -113,7 +113,7 @@ export const Signup = () => {
                         </div>
 
                         <div className='w-full mt-4'>
-                            <p>Experience (Years): {formData.experience || 1}</p>
+                            <p className='font-semibold'>Experience (Years): {formData.experience || 1}</p>
                             <input 
                                 type="range" 
                                 min="1" 
