@@ -26,7 +26,7 @@ export const Navbar = () => {
             <NavLink to={''}> <span className='border-gray-500 border-1 shadow-none mx-2 rounded-2xl transition delay-75 hover:bg-gray-100 cursor-pointer px-2 py-1 text-sm font-light no-underline lg:block hidden'>Admin login</span> </NavLink>
         </div>
 
-        <button className='bg-indigo-500 hover:bg-indigo-600 cursor-pointer text-sm w-[10rem] h-10 rounded-full my-auto text-white mr-6 lg:block hidden' id='create ac button' onClick={() => navigate('/login')}>Create Account</button>
+        <button className='bg-indigo-500 hover:bg-indigo-600 cursor-pointer text-sm w-[10rem] h-10 rounded-full my-auto text-white mr-6 lg:block hidden' id='create ac button' onClick={() => navigate('/signup')}>Create Account</button>
     </div>
   )
 }
