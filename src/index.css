@@ -16,3 +16,8 @@
 ::-webkit-scrollbar {
     display: none;
 }
+
+.no-select {
+    user-select: none;
+  }
+  
