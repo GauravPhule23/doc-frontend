@@ -22,7 +22,7 @@ export const Login = () => {
     data.append('role', userType);
     console.log(data)
 
-    await axios.post("http://localhost:8001/api/v1/Authentication/login", data, {
+    await axios.post("https://localhost:8001/api/v1/Authentication/login", data, {
       headers: { "Content-Type": "multipart/form-data" },
       withCredentials: true,
     })
