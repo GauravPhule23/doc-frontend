@@ -26,43 +26,86 @@ export const Signup = () => {
         }
     };
     const submitFn = async (e) => {
-    e.preventDefault();
-    const email = formData.email
-    const password = formData.password
-    const role = userType
+        e.preventDefault();
+        if (userType == "Doctor") {
+            const data = new FormData();
+            data.append('fullname', formData.fullname);
+            data.append('email', formData.email);
+            data.append('password', formData.password);
+            data.append('gender', formData.gender);
+            data.append('speciality', formData.speciality);
+            data.append('dob', formData.dob);
+            data.append('experienceOf', formData.experienceOf || 1);
+            data.append('role', userType);
+            if (formData.DP) {
+                data.append('DP', formData.DP); // Append file
+            }
+            // console.log(obj)
+            await axios.post("http://localhost:8001/api/v1/Authentication/signup", data, {
+                headers: { "Content-Type": "multipart/form-data" },
+                withCredentials: true,
+            })
+                .then(response => {
+                    console.log("✅ Response:", response)
+                    console.log("✅ Response.data:", response.data.doctor)
+                    console.log("✅ Response.status:", response.data.doctor.dpUrl)
+                    console.log("✅ Response.statusText:", response.statusText)
+                    console.log("✅ Response.headers:", response.headers)
+                    console.log("✅ Response.config:", response.config)
+                    
+                })
+                .catch(error => {
+                    console.error("❌ Error:", error);
+                    if (error.response) {
+                        console.log("📌 Server responded with:", error.response.data);
+                    } else if (error.request) {
+                        console.log("📌 No response received:", error.request);
+                    } else {
+                        console.log("📌 Axios error:", error.message);
+                    }
+                });
+                
+            }else if(userType == "Patient"){
+            const data = new FormData();
+            data.append('fullname', formData.fullname);
+            data.append('email', formData.email);
+            data.append('password', formData.password);
+            data.append('gender', formData.gender);
+            data.append('dob', formData.dob);
+            data.append('role', userType);
+            // if (formData.DP) {
+            //     data.append('DP', formData.DP); // Append file
+            // }
+            // console.log(obj)
+            await axios.post("http://quickcare-backend.vercel.app/api/v1/Authentication/signup", data, {
+                headers: { "Content-Type": "multipart/form-data" },
+                withCredentials: true,
+            })
+                .then(response => {
+                    console.log("✅ Response:", response)
+                    console.log("✅ Response.data:", response.data.patient)
+                    // console.log("✅ Response.status:", response.data.doctor.dpUrl)
+                    console.log("✅ Response.statusText:", response.statusText)
+                    console.log("✅ Response.headers:", response.headers)
+                    console.log("✅ Response.config:", response.config)
+                    
+                })
+                .catch(error => {
+                    console.error("❌ Error:", error);
+                    if (error.response) {
+                        console.log("📌 Server responded with:", error.response.data);
+                    } else if (error.request) {
+                        console.log("📌 No response received:", error.request);
+                    } else {
+                        console.log("📌 Axios error:", error.message);
+                    }
+                });
 
-    const data = {
-      email,
-      password,
-      role
-    }
-    console.log(data);
-    
-
-    await axios.post("https://quickcare-backend.vercel.app/api/v1/Authentication/login", data, {
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true,
-    })
-      .then(response => {
-        console.log("✅ Response:", response)
-        console.log("✅ Response.data:", response.data.message)
-
-
-      })
-      .catch(error => {
-        console.error("❌ Error:", error);
-        if (error.response) {
-          console.log("📌 Server responded with:", error.response.data);
-        } else if (error.request) {
-          console.log("📌 No response received:", error.request);
-        } else {
-          console.log("📌 Axios error:", error.message);
         }
-      });
 
-    // console.log(formData);
 
-  }
+
+    }
 
     return (
         <form className="min-h-[80vh] flex items-center" onSubmit={submitFn}>
