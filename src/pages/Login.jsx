@@ -28,7 +28,7 @@ export const Login = () => {
     console.log(data);
     
 
-    await axios.post("http://quickcare-backend.vercel.app/api/v1/Authentication/login", data, {
+    await axios.post("https://quickcare-backend.vercel.app/api/v1/Authentication/login", data, {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     })
