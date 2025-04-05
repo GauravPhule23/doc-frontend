@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import axios from 'axios';
 
 export const Signup = () => {
-    const [userType, setUserType] = useState('user');
+    const [userType, setUserType] = useState('Patient');
     const [formData, setFormData] = useState({
         fullname: '',
         email: '',
@@ -114,8 +114,8 @@ export const Signup = () => {
                 {/* Tab Switch */}
                 <div className="flex w-full ">
                     <button
-                        className={`flex-1 py-2 ${userType === 'user' ? 'bg-indigo-600 text-white' : 'bg-gray-200'} rounded-l-lg`}
-                        onClick={() => setUserType('user')}
+                        className={`flex-1 py-2 ${userType === 'Patient' ? 'bg-indigo-600 text-white' : 'bg-gray-200'} rounded-l-lg`}
+                        onClick={() => setUserType('Patient')}
                         type="button"
                     >User</button>
                     <button
@@ -125,7 +125,7 @@ export const Signup = () => {
                     >Doctor</button>
                 </div>
 
-                <p className='text-2xl font-semibold mt-2 mx-auto'>Create {userType === 'user' ? 'User' : 'Doctor'} Account</p>
+                <p className='text-2xl font-semibold mt-2 mx-auto'>Create {userType === 'Patient' ? 'User' : 'Doctor'} Account</p>
 
                 {userType === 'Doctor' && (
                     <div className='w-full flex flex-col items-center my-3'>
