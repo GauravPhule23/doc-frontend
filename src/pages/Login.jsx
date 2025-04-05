@@ -16,14 +16,20 @@ export const Login = () => {
 
   const submitFn = async (e) => {
     e.preventDefault();
-    const data = new FormData();
-    data.append('email', formData.email);
-    data.append('password', formData.password);
-    data.append('role', userType);
-    console.log(data)
+    const email = formData.email
+    const password = formData.password
+    const role = userType
 
-    await axios.post("https://quickcare-backend.vercel.app/api/v1/Authentication/login", data, {
-      headers: { "Content-Type": "multipart/form-data" },
+    const data = {
+      email,
+      password,
+      role
+    }
+    console.log(data);
+    
+
+    await axios.post("http://quickcare-backend.vercel.app/api/v1/Authentication/login", data, {
+      headers: { "Content-Type": "application/json" },
       withCredentials: true,
     })
       .then(response => {
@@ -43,10 +49,9 @@ export const Login = () => {
         }
       });
 
-    console.log(formData);
+    // console.log(formData);
 
   }
-
   return (
     <form className="min-h-[80vh] flex items-center" onSubmit={submitFn}>
       <div className="flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 text-zinc-600 rounded-xl shadow-lg">
