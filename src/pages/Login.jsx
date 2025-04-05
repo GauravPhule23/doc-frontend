@@ -22,7 +22,7 @@ export const Login = () => {
     data.append('role', userType);
     console.log(data)
 
-    await axios.post("https://quickcare-henna.vercel.app/api/v1/Authentication/login", data, {
+    await axios.post("https://quickcare-backend.vercel.app/api/v1/Authentication/login", data, {
       headers: { "Content-Type": "multipart/form-data" },
       withCredentials: true,
     })
