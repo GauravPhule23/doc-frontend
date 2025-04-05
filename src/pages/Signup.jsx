@@ -41,7 +41,7 @@ export const Signup = () => {
                 data.append('DP', formData.DP); // Append file
             }
             // console.log(obj)
-            await axios.post("http://localhost:8001/api/v1/Authentication/signup", data, {
+            await axios.post("https://quickcare-backend.vercel.app/api/v1/Authentication/signup", data, {
                 headers: { "Content-Type": "multipart/form-data" },
                 withCredentials: true,
             })
@@ -77,7 +77,7 @@ export const Signup = () => {
             //     data.append('DP', formData.DP); // Append file
             // }
             // console.log(obj)
-            await axios.post("http://quickcare-backend.vercel.app/api/v1/Authentication/signup", data, {
+            await axios.post("https://quickcare-backend.vercel.app/api/v1/Authentication/signup", data, {
                 headers: { "Content-Type": "multipart/form-data" },
                 withCredentials: true,
             })
