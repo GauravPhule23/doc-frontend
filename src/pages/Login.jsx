@@ -43,6 +43,8 @@ export const Login = () => {
       .catch(error => {
         console.error("❌ Error:", error);
         const errMsg = error.response?.data?.errors;
+        
+        //catches error
 
         if (errorMessage.includes("Incorrect password")) {
           toast.error("Incorrect password");
