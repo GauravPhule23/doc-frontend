@@ -2,6 +2,8 @@ import React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router';
 import axios from 'axios';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const Login = () => {
   const [userType, setUserType] = useState('Patient');
@@ -40,12 +42,24 @@ export const Login = () => {
       })
       .catch(error => {
         console.error("❌ Error:", error);
-        if (error.response) {
-          console.log("📌 Server responded with:", error.response.data);
+        const errMsg = error.response?.data?.errors;
+
+        if (errorMessage.includes("Incorrect password")) {
+          toast.error("Incorrect password");
         } else if (error.request) {
           console.log("📌 No response received:", error.request);
         } else {
           console.log("📌 Axios error:", error.message);
+        }
+
+        if (typeof errMsg === "string") {
+            if (errMsg.includes("E11000 duplicate key error collection")) {
+                toast.error("User already exists");
+            } else {
+                toast.error(errMsg);
+            }
+        } else {
+            toast.error("Something went wrong.");
         }
       });
 

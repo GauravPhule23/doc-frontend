@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router';
 import axios from 'axios';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 export const Signup = () => {
     const [userType, setUserType] = useState('Patient');
@@ -19,12 +22,14 @@ export const Signup = () => {
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
+
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
             setFormData((prev) => ({ ...prev, DP: file }));
         }
     };
+
     const submitFn = async (e) => {
         e.preventDefault();
         if (userType == "Doctor") {
@@ -56,12 +61,16 @@ export const Signup = () => {
                 })
                 .catch(error => {
                     console.error("❌ Error:", error);
-                    if (error.response) {
-                        console.log("📌 Server responded with:", error.response.data);
-                    } else if (error.request) {
-                        console.log("📌 No response received:", error.request);
+                    const errMsg = error.response?.data?.errors;
+
+                    if (typeof errMsg === "string") {
+                        if (errMsg.includes("E11000 duplicate key error collection")) {
+                            toast.error("User already exists");
+                        } else {
+                            toast.error(errMsg);
+                        }
                     } else {
-                        console.log("📌 Axios error:", error.message);
+                        toast.error("Something went wrong.");
                     }
                 });
                 
