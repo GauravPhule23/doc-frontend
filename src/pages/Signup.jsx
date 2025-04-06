@@ -57,7 +57,7 @@ export const Signup = () => {
                     console.log("✅ Response.statusText:", response.statusText)
                     console.log("✅ Response.headers:", response.headers)
                     console.log("✅ Response.config:", response.config)
-                    
+                    toast.success("Created account successfully");
                 })
                 .catch(error => {
                     console.error("❌ Error:", error);

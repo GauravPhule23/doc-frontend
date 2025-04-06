@@ -37,7 +37,7 @@ export const Login = () => {
       .then(response => {
         console.log("✅ Response:", response)
         console.log("✅ Response.data:", response.data.message)
-
+        toast.success("Logged in successfully");
 
       })
       .catch(error => {
