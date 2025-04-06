@@ -43,11 +43,9 @@ export const Login = () => {
       .catch(error => {
         console.error("❌ Error:", error);
         const errMsg = error.response?.data?.errors;
-        
-        //catches error
 
-        if (errorMessage.includes("Incorrect password")) {
-          toast.error("Incorrect password");
+        if (error.response) {
+          console.log("📌 Server responded with:", error.response.data);
         } else if (error.request) {
           console.log("📌 No response received:", error.request);
         } else {
@@ -55,13 +53,13 @@ export const Login = () => {
         }
 
         if (typeof errMsg === "string") {
-            if (errMsg.includes("E11000 duplicate key error collection")) {
-                toast.error("User already exists");
+            if (errorMessage.includes("Incorrect password")) {
+              toast.error("Incorrect password");
             } else {
-                toast.error(errMsg);
+              toast.error(errMsg);
             }
         } else {
-            toast.error("Something went wrong.");
+          toast.error("Something went wrong.");
         }
       });
 
