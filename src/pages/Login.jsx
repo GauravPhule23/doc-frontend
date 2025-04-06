@@ -53,7 +53,7 @@ export const Login = () => {
         }
 
         if (typeof errMsg === "string") {
-            if (errorMessage.includes("Incorrect password")) {
+            if (errMsg.includes("Incorrect password")) {
               toast.error("Incorrect password");
             } else {
               toast.error(errMsg);
