@@ -18,7 +18,7 @@ export const Contact = () => {
 
           <AuthorCard 
             name="Shubham Pawar"
-            imgsrc="https://pbs.twimg.com/profile_images/1904974670597865472/wOfhXPZo_400x400.jpg"
+            imgsrc="https://pbs.twimg.com/profile_images/1908420339991748608/-z7SID0h_400x400.jpg"
             github="https://github.com/CodingManiac27"
             linkedin="https://www.linkedin.com/in/shubham-pawar-9092b72b1/"
             role="Frontend"
