@@ -2,6 +2,8 @@ import React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router';
 import axios from 'axios';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const Login = () => {
   const [userType, setUserType] = useState('Patient');
@@ -16,24 +18,32 @@ export const Login = () => {
 
   const submitFn = async (e) => {
     e.preventDefault();
-    const data = new FormData();
-    data.append('email', formData.email);
-    data.append('password', formData.password);
-    data.append('role', userType);
-    console.log(data)
+    const email = formData.email
+    const password = formData.password
+    const role = userType
 
-    await axios.post("https://localhost:8001/api/v1/Authentication/login", data, {
-      headers: { "Content-Type": "multipart/form-data" },
+    const data = {
+      email,
+      password,
+      role
+    }
+    console.log(data);
+    
+
+    await axios.post("https://quickcare-backend.vercel.app/api/v1/Authentication/login", data, {
+      headers: { "Content-Type": "application/json" },
       withCredentials: true,
     })
       .then(response => {
         console.log("✅ Response:", response)
         console.log("✅ Response.data:", response.data.message)
-
+        toast.success("Logged in successfully");
 
       })
       .catch(error => {
         console.error("❌ Error:", error);
+        const errMsg = error.response?.data?.errors;
+
         if (error.response) {
           console.log("📌 Server responded with:", error.response.data);
         } else if (error.request) {
@@ -41,12 +51,21 @@ export const Login = () => {
         } else {
           console.log("📌 Axios error:", error.message);
         }
+
+        if (typeof errMsg === "string") {
+            if (errMsg.includes("Incorrect password")) {
+              toast.error("Incorrect password");
+            } else {
+              toast.error(errMsg);
+            }
+        } else {
+          toast.error("Something went wrong.");
+        }
       });
 
-    console.log(formData);
+    // console.log(formData);
 
   }
-
   return (
     <form className="min-h-[80vh] flex items-center" onSubmit={submitFn}>
       <div className="flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 text-zinc-600 rounded-xl shadow-lg">

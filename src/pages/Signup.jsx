@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router';
 import axios from 'axios';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 export const Signup = () => {
-    const [userType, setUserType] = useState('user');
+    const [userType, setUserType] = useState('Patient');
     const [formData, setFormData] = useState({
         fullname: '',
         email: '',
@@ -19,50 +22,99 @@ export const Signup = () => {
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
+
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
             setFormData((prev) => ({ ...prev, DP: file }));
         }
     };
+
     const submitFn = async (e) => {
-    e.preventDefault();
-    const email = formData.email
-    const password = formData.password
-    const role = userType
+        e.preventDefault();
+        if (userType == "Doctor") {
+            const data = new FormData();
+            data.append('fullname', formData.fullname);
+            data.append('email', formData.email);
+            data.append('password', formData.password);
+            data.append('gender', formData.gender);
+            data.append('speciality', formData.speciality);
+            data.append('dob', formData.dob);
+            data.append('experienceOf', formData.experienceOf || 1);
+            data.append('role', userType);
+            if (formData.DP) {
+                data.append('DP', formData.DP); // Append file
+            }
+            // console.log(obj)
+            await axios.post("https://quickcare-backend.vercel.app/api/v1/Authentication/signup", data, {
+                headers: { "Content-Type": "multipart/form-data" },
+                withCredentials: true,
+            })
+                .then(response => {
+                    console.log("✅ Response:", response)
+                    console.log("✅ Response.data:", response.data.doctor)
+                    console.log("✅ Response.status:", response.data.doctor.dpUrl)
+                    console.log("✅ Response.statusText:", response.statusText)
+                    console.log("✅ Response.headers:", response.headers)
+                    console.log("✅ Response.config:", response.config)
+                    toast.success("Created account successfully");
+                })
+                .catch(error => {
+                    console.error("❌ Error:", error);
+                    const errMsg = error.response?.data?.errors;
 
-    const data = {
-      email,
-      password,
-      role
-    }
-    console.log(data);
-    
+                    if (typeof errMsg === "string") {
+                        if (errMsg.includes("E11000 duplicate key error collection")) {
+                            toast.error("User already exists");
+                        } else {
+                            toast.error(errMsg);
+                        }
+                    } else {
+                        toast.error("Something went wrong.");
+                    }
+                });
+                
+            }else if(userType == "Patient"){
+            const data = new FormData();
+            data.append('fullname', formData.fullname);
+            data.append('email', formData.email);
+            data.append('password', formData.password);
+            data.append('gender', formData.gender);
+            data.append('dob', formData.dob);
+            data.append('role', userType);
+            // if (formData.DP) {
+            //     data.append('DP', formData.DP); // Append file
+            // }
+            // console.log(obj)
+            await axios.post("https://quickcare-backend.vercel.app/api/v1/Authentication/signup", data, {
+                headers: { "Content-Type": "multipart/form-data" },
+                withCredentials: true,
+            })
+                .then(response => {
+                    console.log("✅ Response:", response)
+                    console.log("✅ Response.data:", response.data.patient)
+                    // console.log("✅ Response.status:", response.data.doctor.dpUrl)
+                    console.log("✅ Response.statusText:", response.statusText)
+                    console.log("✅ Response.headers:", response.headers)
+                    console.log("✅ Response.config:", response.config)
+                    
+                })
+                .catch(error => {
+                    console.error("❌ Error:", error);
+                    if (error.response) {
+                        console.log("📌 Server responded with:", error.response.data);
+                    } else if (error.request) {
+                        console.log("📌 No response received:", error.request);
+                    } else {
+                        console.log("📌 Axios error:", error.message);
+                    }
+                });
 
-    await axios.post("https://quickcare-backend.vercel.app/api/v1/Authentication/login", data, {
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true,
-    })
-      .then(response => {
-        console.log("✅ Response:", response)
-        console.log("✅ Response.data:", response.data.message)
-
-
-      })
-      .catch(error => {
-        console.error("❌ Error:", error);
-        if (error.response) {
-          console.log("📌 Server responded with:", error.response.data);
-        } else if (error.request) {
-          console.log("📌 No response received:", error.request);
-        } else {
-          console.log("📌 Axios error:", error.message);
         }
-      });
 
-    // console.log(formData);
 
-  }
+
+    }
 
     return (
         <form className="min-h-[80vh] flex items-center" onSubmit={submitFn}>
@@ -71,8 +123,8 @@ export const Signup = () => {
                 {/* Tab Switch */}
                 <div className="flex w-full ">
                     <button
-                        className={`flex-1 py-2 ${userType === 'user' ? 'bg-indigo-600 text-white' : 'bg-gray-200'} rounded-l-lg`}
-                        onClick={() => setUserType('user')}
+                        className={`flex-1 py-2 ${userType === 'Patient' ? 'bg-indigo-600 text-white' : 'bg-gray-200'} rounded-l-lg`}
+                        onClick={() => setUserType('Patient')}
                         type="button"
                     >User</button>
                     <button
@@ -82,7 +134,7 @@ export const Signup = () => {
                     >Doctor</button>
                 </div>
 
-                <p className='text-2xl font-semibold mt-2 mx-auto'>Create {userType === 'user' ? 'User' : 'Doctor'} Account</p>
+                <p className='text-2xl font-semibold mt-2 mx-auto'>Create {userType === 'Patient' ? 'User' : 'Doctor'} Account</p>
 
                 {userType === 'Doctor' && (
                     <div className='w-full flex flex-col items-center my-3'>
