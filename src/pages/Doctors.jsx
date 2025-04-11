@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { useParams } from 'react-router'
+import { Link } from 'react-router';
+import { useContext } from 'react'
+import { useState, useEffect } from 'react'
+import { doctors as staticDoctors } from '../assets/assets'
+// import { Appcontext } from '../context/Appcontext'
 import axios from 'axios';
-import { doctors as staticDoctors } from '../assets/assets';
 
 export const Doctors = () => {
   const [doctorsList, setDoctorsList] = useState([]);
@@ -9,14 +13,14 @@ export const Doctors = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const res = await axios.get('https://quickcare-backend.vercel.app/api/patient/get-doctors');
+        const res = await axios.get('https://quickcare-backend.vercel.app/api/v1/patient/get-doctors');
         if (res.data && res.data.data && res.data.data.length > 0) {
           setDoctorsList(res.data.data);
         } else {
           setDoctorsList(staticDoctors);
         }
       } catch (error) {
-        console.error('Failed to fetch doctors from backend, using static data.', error);
+        console.error("Failed to fetch doctors, using static data:", error);
         setDoctorsList(staticDoctors);
       }
     };
